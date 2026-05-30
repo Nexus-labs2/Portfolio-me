@@ -1,0 +1,5 @@
+To add your resume:
+1. Export your CV as a PDF
+2. Rename it to: resume.pdf
+3. Drop it into this folder: assets/resume.pdf
+4. The "Resume / CV" button will automatically open it in a modal popup

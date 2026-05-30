@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    #loader { position:fixed;inset:0;z-index:99999;background:#0a0a0f;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem; }
+    .loader-logo { font-family:'Space Mono',monospace;font-size:.85rem;letter-spacing:3px;color:#00e5ff;opacity:0;animation:loaderFade .6s .2s forwards; }
+    .loader-bar-wrap { width:220px;height:2px;background:rgba(255,255,255,.07);overflow:hidden;opacity:0;animation:loaderFade .6s .4s forwards; }
+    .loader-bar { height:100%;background:linear-gradient(90deg,#00e5ff,#7c3aed);animation:loaderSlide 1.6s ease-in-out infinite; }
+    .loader-text { font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:2px;color:#6b7280;opacity:0;animation:loaderFade .6s .6s forwards; }
+    @keyframes loaderFade { to{opacity:1} }
+    @keyframes loaderSlide { 0%{transform:translateX(-100%)} 50%{transform:translateX(20%)} 100%{transform:translateX(100%)} }
+    body.loading > *:not(#loader) { visibility:hidden; }
+    #loader.done { opacity:0;transition:opacity .5s ease;pointer-events:none; }
+  </style>
+</head>
+<body class="loading">
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-logo">// ECE.PORTFOLIO</div>
+  <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
+  <div class="loader-text">Initialising systems...</div>
+</div>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close" onclick="closeLightbox()">[ ✕ Close ]</span>
+  <img id="lightbox-img" src="" alt="Preview">
+</div>
+
+<!-- CV MODAL -->
+<div id="cv-modal" onclick="closeCV(event)" style="display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,.92);align-items:center;justify-content:center;padding:2rem;">
+  <div class="cv-modal-inner">
+    <div class="cv-modal-header">
+      <span style="font-family:'Space Mono',monospace;font-size:.8rem;color:var(--accent);letter-spacing:2px">// RESUME / CV</span>
+      <div style="display:flex;gap:1rem;align-items:center">
+        <a href="assets/cv/resume.pdf" download class="cv-download-btn">⬇ Download PDF</a>
+        <button class="cv-close-btn" onclick="closeCV(event)">[ ✕ Close ]</button>
+      </div>
+    </div>
+      <div class="cv-fme-wrap">
+      <iframe src="assets/cv/resume.pdf" class="cv-frame" title="Resume"></iframe>
+    </div>
+    <p class="cv-fallback">Can't see the PDF? <a href="assets/cv/resume.pdf" target="_blank">Open in new tab ↗</a></p>
+  </div>
+</div>
+
+<!-- MOBILE DRAWER -->
+<div id="drawer-overlay"></div>
+<div id="mobile-drawer">
+  <div class="drawer-logo">// ECE.PORTFOLIO</div>
+  <div class="drawer-header">
+       <div class="drawer-logo">// ECE.PORTFOLIO</div>
+   <button class="drawer-close-btn" id="drawer-close" aria-label="Close menu">✕</button>
+   </div>
+  <nav class="drawer-links">
+    <a href="#hero">Home</a>
+    <a href="#skills">Skills</a>
+    <a href="#boards-section">Boards worked with</a>
+    <a href="#sensors-section">Sensors worked with</a>
+    <a href="#achievements">Achievements</a>
+    <a href="#major-projects">Projects</a>
+    <a href="#minor-projects">Fun</a>
+    <a href="#certifications">Certs</a>
+  </nav>
+  <button onclick="openCV()" class="drawer-cv-btn">View Resume</button>
+</div>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <a href="#hero" class="nav-logo">// ECE.PORTFOLIO</a>
+  <ul class="nav-links">
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#achievements">Achievements</a></li>
+    <li><a href="#major-projects">Projects</a></li>
+    <li><a href="#minor-projects">Fun</a></li>
+    <li><a href="#certifications">Certs</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="nav-cv-btn" onclick="openCV()">Resume</button>
+  </div>
+</nav>
+<button id="menu-trigger" class="menu-trigger" aria-label="Open menu">MENU</button>
+
+<!-- ═══════════════════════════════════════════════ HERO -->
+<section id="hero">
+  <div class="hero-content">
+    <div class="hero-tag">Electronics &amp; Telecommunication · </div>
+    <h1 class="hero-name" id="hero-name">Atharva<br><span>Baviskar</span></h1>
+    <p class="hero-title">
+      <span id="typed-title"></span><span class="typed-cursor">|</span>
+    </p>
+    <p class="hero-bio" id="hero-bio"></p>
+
+    <!-- Currently building ticker -->
+    <div id="currently-building" class="wip-ticker" style="display:none"></div>
+
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num" id="stat-major">4<span>+</span></div><div class="stat-label">Major Projects</div></div>
+      <div class="stat"><div class="stat-num" id="stat-fun">9<span>+</span></div><div class="stat-label">Fun Builds</div></div>
+      <div class="stat"><div class="stat-num" id="stat-proto">7<span>+</span></div><div class="stat-label">Protocols</div></div>
+    </div>
+
+    <div class="hero-cta">
+      <a href="#major-projects" class="btn-primary">View Projects</a>
+      <button onclick="openCV()" class="btn-outline">Resume / CV</button>
+      <a id="github-link-href" href="#" target="_blank" class="btn-ghost">
+        <svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:currentColor"><path d="M12 0C5.37 0 0 5.373 0 12c0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577v-2.165c-3.338.726-4.033-1.415-4.033-1.415-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+        <span id="github-username">GitHub</span>
+        &nbsp;·&nbsp; <span id="gh-repos">—</span> repos &nbsp;·&nbsp; <span id="gh-followers">—</span> followers
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="circuit-ring"><div class="ring-dot"></div></div>
+    <div class="circuit-ring"><div class="ring-dot ring-dot-2"></div></div>
+    <div class="circuit-ring"></div>
+    <div class="center-glow"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ SKILLS -->
+<section id="skills">
+  <div class="section-label">02 / Expertise</div>
+  <h2 class="section-heading reveal">What I work with</h2>
+  <div class="skills-grid reveal">
+    <div class="skill-card"><div class="skill-icon"></div><div class="skill-title">Development Boards</div><div class="skill-tags" id="tags-boards"></div></div>
+    <div class="skill-card"><div class="skill-icon"></div><div class="skill-title">Protocols Implemented</div><div class="skill-tags" id="tags-protocols"></div></div>
+    <div class="skill-card"><div class="skill-icon"></div><div class="skill-title">Languages</div><div class="skill-tags" id="tags-languages"></div></div>
+    <div class="skill-card"><div class="skill-icon"></div><div class="skill-title">Tools &amp; Platforms</div><div class="skill-tags" id="tags-tools"></div></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ BOARDS -->
+<section id="boards-section" class="hidden-section">
+  <div class="section-label">03 / Boards</div>
+  <h2 class="section-heading reveal">Boards worked with</h2>
+  <div class="boards-grid" id="boards-grid"></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ SENSORS -->
+<section id="sensors-section" class="hidden-section">
+  <div class="section-label">04 / Sensors</div>
+  <h2 class="section-heading reveal">Sensors worked with</h2>
+  <p class="section-sub reveal">Every module on this list has been wired, debugged, and integrated into a real project.</p>
+  <div class="sensors-grid" id="sensors-grid"></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="section-label">05 / Achievements</div>
+  <h2 class="section-heading reveal">Competition<br>Trophy Wall</h2>
+  <div id="achievements-list" class="achievements-list"></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ MAJOR PROJECTS -->
+<section id="major-projects">
+  <div class="section-label">06 / Major Projects</div>
+  <h2 class="section-heading reveal">Major<br>Projects</h2>
+  <div id="major-projects-list"></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ MINOR PROJECTS -->
+<section id="minor-projects">
+  <div class="section-label">07 / Fun Builds</div>
+  <h2 class="section-heading reveal">Things I made for the<br>fun of building things</h2>
+  <p class="section-sub reveal">Quick weekend experiments, silly ideas, and satisfying little contraptions. No deadlines, just vibes.</p>
+  <div class="minor-grid reveal" id="minor-projects-list"></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-label">08 / Certifications</div>
+  <h2 class="section-heading reveal">learned,<br>formally</h2>
+  <div class="cert-section reveal">
+    <h3 class="cert-section-title">That Matter</h3>
+    <div class="cert-grid" id="cert-matters-list"></div>
+  </div>
+  <div class="cert-section reveal">
+    <h3 class="cert-section-title"> Out of Curiosity</h3>
+    <div class="cert-grid" id="cert-curiosity-list"></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">// Crafted with <span>caffeine</span> &amp; curiosity · ECE '26</div>
+  <ul class="footer-links">
+    <li><a href="#" id="footer-email">Email</a></li>
+    <li><a href="#" id="footer-linkedin" target="_blank">LinkedIn</a></li>
+    <li><a href="#" id="footer-github" target="_blank">GitHub</a></li>
+  </ul>
+</footer>
+
+<script src="assets/js/app.js"></script>
+</body>
+</html>
