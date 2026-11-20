@@ -44,6 +44,144 @@
       "Node-RED"
     ]
   },
+  "featured_project_ids": [
+    "proj4",
+    "proj5",
+    "proj6"
+  ],
+  "additional_projects": [
+    {
+      "id": "airvent",
+      "title": "AirVent \u2014 Smart Ventilation System",
+      "status": "completed",
+      "short_desc": "Real-time gas and temperature monitoring with threshold-triggered ventilation and mobile alerts.",
+      "badges": [
+        "ESP32",
+        "Gas Sensor",
+        "Temperature Monitoring",
+        "Relay Control",
+        "Mobile App"
+      ],
+      "summary": "AirVent is a smart ventilation system that monitors gas concentration and room temperature in real time. When the gas concentration exceeds a configurable threshold, the ESP32 activates a ventilation fan through a relay and sends a notification to the mobile app. The app displays live gas concentration, lets users adjust the threshold, and provides a concentration-over-time graph.",
+      "sw_arch": {
+        "Flutter App Shell": [
+          "Hosts the bundled HTML, CSS, and JavaScript dashboard in an Android WebView"
+        ],
+        "Dashboard and Device API": [
+          "Stores the entered ESP32 IP in browser local storage and offers a local demo mode",
+          "Polls the ESP32 HTTP API every second at /api/status",
+          "Controls operating mode, fan state, and gas threshold through /api/mode, /api/fan, and /api/threshold"
+        ],
+        "Visualization": [
+          "Renders live gas readings, threshold status, fan state and runtime, averages, peaks, and a time-series chart"
+        ]
+      },
+      "hw_arch": {
+        "Hardware": [
+          "ESP32 microcontroller",
+          "Gas sensor and temperature sensor",
+          "Relay-controlled ventilation fan",
+          "Buck converter and AC-DC converter"
+        ]
+      },
+      "protocols": [
+        "UART",
+        "WebSocket"
+      ],
+      "images": [
+        "WhatsApp Image 2026-11-20 at 17.07.56 (1).jpeg",
+        "WhatsApp Image 2026-11-20 at 17.07.56 (2).jpeg",
+        "WhatsApp Image 2026-11-20 at 17.07.56.jpeg"
+      ],
+      "image_dir": "projects/major/proj_11",
+      "android_app": "images/Airvent.apk"
+    },
+    {
+      "id": "clk-d",
+      "title": "CLK-D",
+      "status": "completed",
+      "short_desc": "Arduino Nano clock with a transistor-driven LED matrix, RTC module, buzzer, and ESP-01 for setting the date and time.",
+      "badges": [
+        "Arduino Nano",
+        "LED Matrix",
+        "RTC",
+        "ESP-01",
+        "Transistor Drivers",
+        "Buzzer"
+      ],
+      "summary": "CLK-D is an Arduino Nano-based clock that displays the time using an LED matrix. A combination of transistors drives the matrix LEDs. The system includes an RTC module for timekeeping, a buzzer, and an ESP-01 connected to the Arduino Nano to set the date and time.",
+      "sw_arch": {},
+      "hw_arch": {
+        "Hardware": [
+          "Arduino Nano clock controller",
+          "LED matrix driven through a combination of transistors",
+          "RTC module for timekeeping",
+          "ESP-01 connected to the Arduino Nano to set the date and time",
+          "Buzzer"
+        ]
+      },
+      "protocols": [
+        "UART",
+        "I2C",
+        "WebSocket"
+      ],
+      "images": [
+        "WhatsApp Image 2026-09-24 at 21.50.40.jpeg",
+        "WhatsApp Image 2026-09-24 at 21.50.41.jpeg",
+        "WhatsApp Image 2026-09-24 at 21.50.42.jpeg",
+        "WhatsApp Image 2026-09-24 at 21.50.43.jpeg",
+        "WhatsApp Image 2026-09-24 at 21.50.45 (1).jpeg"
+      ],
+      "image_dir": "projects/major/proj_10"
+    },
+    {
+      "id": "nexcam",
+      "title": "NEXCAM",
+      "status": "completed",
+      "short_desc": "ESP32-CAM wearable device with motion-sensing modes and a companion image-capture app.",
+      "badges": [
+        "ESP32-CAM",
+        "MPU9250",
+        "SSD1306 OLED",
+        "Image Capture",
+        "Local Storage"
+      ],
+      "summary": "NEXCAM is an ESP32-CAM based wearable/handheld device combining motion sensing and camera functionality. It has two modes switched by physical buttons — emoji mode (MPU9250 IMU reads orientation and displays animated emoji faces on OLED based on tilt/motion) and camera mode (boots ESP32-CAM, connects to WiFi, and shows real-time status on OLED). A companion NEXCAM app captures images and stores them locally. Hardware stack: ESP32-CAM, MPU9250 IMU, SSD1306 OLED, two push buttons, and PCF8574 I²C GPIO expander. All I²C devices share a single bus on GPIO 13/14.",
+      "sw_arch": {
+        "Flutter Camera App": [
+          "Uses the Android CameraX-backed Flutter camera plugin for camera access and still capture",
+          "Saves captured camera files locally"
+        ],
+        "ESP32 Device Connection": [
+          "Configures Wi-Fi through the /api/wifi HTTP endpoint and reads device status from /api/status",
+          "Controls the MJPEG stream through /api/stream?enabled=... and parses incoming JPEG frames"
+        ]
+      },
+      "hw_arch": {
+        "Hardware": [
+          "ESP32-CAM",
+          "MPU9250 IMU",
+          "SSD1306 OLED",
+          "Two physical mode-selection buttons",
+          "PCF8574 I²C GPIO expander"
+        ]
+      },
+      "protocols": [
+        "I2C",
+        "WebSocket"
+      ],
+      "images": [
+        "WhatsApp Image 2026-09-25 at 16.33.11 (1).jpeg",
+        "WhatsApp Image 2026-09-25 at 16.34.27.jpeg",
+        "WhatsApp Image 2026-10-25 at 22.27.28.jpeg",
+        "WhatsApp Image 2026-11-04 at 23.40.03.jpeg",
+        "WhatsApp Image 2026-11-20 at 16.59.57.jpeg",
+        "WhatsApp Image 2026-11-20 at 17.02.06.jpeg"
+      ],
+      "image_dir": "projects/major/proj_8",
+      "android_app": "images/NEXCAM.apk"
+    }
+  ],
   "major_projects": [
     {
       "id": "proj1",
@@ -415,16 +553,110 @@
       ],
       "wip_note": "Sensor fusion pipeline for ECG + SpO2 + temperature + MPU6050 is in active development. Android app graphs and saves all vitals. WS2812B activity-sync LED logic is being tuned. Humanoid proximity-based AI health briefing module is in early prototyping phase.",
       "images": []
+    },
+    {
+      "id": "clk-x",
+      "parent_id": "proj7",
+      "title": "CLK-X",
+      "status": "completed",
+      "short_desc": "ESP32-S3 smartwatch prototype and Flutter companion with I2C sensors, BLE telemetry and HID controls, phone-assisted features, and OTA updates.",
+      "summary": "CLK-X is a companion-app-driven smartwatch prototype built around an ESP32-S3 Mini and a Flutter phone app. The watch reads MPU6050 motion, BMP280 ambient temperature and pressure, and MAX30102-compatible optical pulse data over a shared I2C bus; it also drives a 128x64 SSD1306 OLED, four physical buttons, a WS2812 status LED, and an optional vibration motor driver. A custom BLE GATT link carries newline-delimited JSON commands and telemetry between the watch and app, while BLE HID lets the watch act as a mouse or keyboard-style presentation controller for a computer. The app handles watch discovery and its first-use PIN check, clock and configuration sync, sensor dashboards and charts, CSV export, trip tracking and maps, and phone-backed camera, media, call, notification, route, and weather features. Watch modes include normal and clock-only operation, motion-controlled HID, the NEXCAM camera remote, and NEXGES rule-based expression feedback. The Arduino firmware runs recurring work in a cooperative loop, targeting 25 Hz motion reads (50 Hz in mouse mode), 5 Hz connected telemetry, and roughly 25 FPS OLED updates; these are scheduling targets, not accuracy or latency guarantees. OTA transfers use a separate raw BLE characteristic and check image size and CRC-32 before applying an update. This remains a prototype: heart rate is an unvalidated beat-detection estimate, SpO2 is not measured, battery percentage is a 100% fallback because no ADC pin is configured, and the app PIN is not BLE encryption or authenticated pairing. Phone GPS and other phone services depend on the handset and its permissions; deep-sleep options shown by the app are not implemented by the current firmware.",
+      "badges": [
+        "Flutter",
+        "Bluetooth LE",
+        "Motion Sensors",
+        "Maps",
+        "Charts"
+      ],
+      "sw_arch": {
+        "ESP32-S3 firmware runtime": [
+          "C++ firmware built with the Arduino framework and PlatformIO; setup() initializes GPIO, I2C devices, NVS preferences, display, sensors, BLE, and the CLK-X advertising identity.",
+          "A cooperative loop() services button events, queued BLE commands, sensors, display, LED and haptic feedback, HID actions, telemetry, screen timeout, and OTA work. It yields with a short delay rather than creating application-owned FreeRTOS tasks.",
+          "BLE callbacks hand received commands and OTA chunks to the main loop using FreeRTOS queues and mutexes; NimBLE/ESP-IDF internal scheduling is provided by the platform.",
+          "Configured CPU frequency is 80 MHz. Nominal work periods are 40 ms for motion (25 Hz), 20 ms in mouse mode (50 Hz), 200 ms for environment sampling/telemetry (5 Hz), and about 40 ms for OLED rendering (25 FPS; mouse mode targets 20 FPS)."
+        ],
+        "Firmware device and state services": [
+          "Sensor, button, OLED, WS2812, and optional vibration-driver logic are coordinated by the main loop; sensor presence is probed at startup so an absent module need not prevent other watch functions from starting.",
+          "Preferences (ESP32 NVS) persist paired-state, selected mode/configuration, and optional crowd-beacon settings.",
+          "Clock-only mode suppresses motion, BMP, and PPG work while BLE and the main loop continue. Display timeout turns off the OLED; it does not put the MCU into deep sleep."
+        ],
+        "BLE transport and update path": [
+          "NimBLE-Arduino exposes a custom GATT service; the phone discovers the service and characteristics, subscribes to telemetry, then sends time, configuration, and control commands.",
+          "BLE callbacks reassemble newline-delimited UTF-8 JSON command data and enqueue it for loop() processing; notifications carry watch status and sensor telemetry.",
+          "A separate OTA characteristic accepts bounded raw image chunks. Firmware checks expected image size, written length, and CRC-32 before finalizing and restarting.",
+          "The displayed four-digit PIN is an application-level check, not BLE encryption or authenticated bonding; the report notes that command pairing is not required by default."
+        ],
+        "Flutter companion application": [
+          "Dart/Flutter app uses Provider for state, flutter_blue_plus for BLE transport, and a BleLink / WatchController separation between packet handling, watch state, and screens.",
+          "Watch, Sensors, Map, Buttons, Modes, and Media screens provide device control, charts, sensor toggles, local configuration, trip history, and CSV export.",
+          "Phone-side integrations provide GPS trip tracking and maps, plus camera, media, call, notification, and optional route/weather information; these features depend on phone OS services and permissions.",
+          "SharedPreferences stores app configuration and trip data separately from the firmware's NVS state; recent chart data and a rolling sensor log are maintained on the phone."
+        ],
+        "Mode and sensor behavior": [
+          "Normal and clock-only watch modes; mouse mode maps wrist tilt and button actions to BLE HID; NEXCAM controls the phone camera; NEXGES displays a threshold-based expression estimate.",
+          "The PPG path detects beats and averages a small set of heart-rate estimates; it does not measure SpO2 or provide validated physiological readings.",
+          "The app exposes deeper sleep and wake configuration that current firmware does not implement; sensor toggles and display timeout are the supported power-related behaviors."
+        ]
+      },
+      "hw_arch": {
+        "Controller and target": [
+          "Generic ESP32-S3 Mini target using the PlatformIO esp32-s3-devkitc-1 profile and Arduino framework; configured CPU frequency is 80 MHz. Confirm the exact board and flash variant before flashing.",
+          "The ESP32-S3 coordinates local sensor/display I2C, GPIO inputs/outputs, BLE GATT communication with the phone, and BLE HID interaction with a host computer."
+        ],
+        "Shared I2C bus (SDA GPIO 8, SCL GPIO 9, 400 kHz)": [
+          "MPU6050 accelerometer/gyroscope: probes 0x68/0x69; configured for +/-8 g and +/-500 degrees/s with an approximately 21 Hz low-pass setting. Read at 25 Hz normally and 50 Hz in mouse mode.",
+          "BMP280 environmental sensor: probes 0x76/0x77; supplies ambient temperature and pressure, with altitude derived from a fixed 1013.25 hPa sea-level pressure reference.",
+          "MAX30102-compatible optical PPG sensor: initialized through the MAX3010x library and used for demonstration beat/heart-rate estimation only; SpO2 is not implemented.",
+          "SSD1306 monochrome OLED: 128x64 display at I2C address 0x3C for the clock, sensor/status pages, pairing/update screens, and interaction feedback."
+        ],
+        "Physical inputs and outputs": [
+          "Four active-low buttons on GPIO 4-7 use INPUT_PULLUP and a 30 ms debounce; long presses and button combinations select pages and modes.",
+          "WS2812 status/event LED data uses GPIO 10.",
+          "Optional vibration motor control is a logic signal on GPIO 11 and requires an external transistor or MOSFET driver; GPIO 11 is not intended to drive the motor directly."
+        ],
+        "Wireless and power boundaries": [
+          "Bluetooth Low Energy connects the watch to the Flutter phone app and exposes HID mouse/keyboard behavior to a computer; the documented watch path relies on the phone for GPS, internet, camera, media, and notifications.",
+          "Battery ADC is unconfigured (pin -1), so the current firmware cannot measure battery voltage or charging state and reports fallback values."
+        ]
+      },
+      "protocols": [
+        "BLE",
+        "I2C"
+      ],
+      "requirements": {
+        "Firmware and App": [
+          "ESP32-S3 Mini firmware built with the Arduino framework using the PlatformIO esp32s3devkitc1 profile; verify the exact board and flash variant before flashing.",
+          "Flutter phone companion connected to the watch over BLE; phone-side GPS, camera, media, and notification features depend on their corresponding OS services and permissions."
+        ],
+        "Hardware and Interfaces": [
+          "SSD1306 128x64 OLED, MPU6050, BMP280, and MAX30102-compatible PPG sensor on the shared I2C bus: SDA GPIO8, SCL GPIO9, 400 kHz.",
+          "Four active-low buttons on GPIO4-GPIO7; WS2812 status/event LED on GPIO10; optional vibration motor control on GPIO11 requires an external transistor or MOSFET driver."
+        ],
+        "Core Behaviors": [
+          "BLE scan/connect, first-use four-digit PIN, paired-state persistence, clock/time synchronization, connection and firmware status, and OTA updates checked by size and CRC-32.",
+          "Phone app provides Watch, Sensors, Map, Buttons, Modes, and Media tabs, with charts, CSV export, sensor toggles, local configuration, and optional route/weather integration."
+        ],
+        "Implementation Limits": [
+          "Battery ADC is not configured; the reported 100% is a fallback and charging status is not measured.",
+          "SpO2 is not measured, and the heart-rate path is basic beat detection rather than a validated medical measurement.",
+          "Deep sleep, hibernate, shake/timer wake, night schedule, and generic per-button action settings are not implemented by the current firmware."
+        ]
+      },
+      "images": [
+        "WhatsApp Image 2026-11-19 at 23.06.47.jpeg",
+        "WhatsApp Image 2026-11-19 at 23.06.48 (1).jpeg",
+        "WhatsApp Image 2026-11-19 at 23.06.48.jpeg",
+        "WhatsApp Image 2026-11-19 at 23.06.49 (1).jpeg",
+        "WhatsApp Image 2026-11-19 at 23.06.49 (2).jpeg",
+        "WhatsApp Image 2026-11-19 at 23.06.49.jpeg",
+        "WhatsApp Image 2026-11-19 at 23.06.50 (1).jpeg",
+        "WhatsApp Image 2026-11-19 at 23.06.50.jpeg"
+      ],
+      "image_dir": "projects/major/proj_9",
+      "android_app": "images/CLK-X.apk"
     }
   ],
   "minor_projects": [
-    {
-      "name": "NEX-CAM",
-      "desc": "NEX-CAM is an ESP32-CAM based wearable/handheld device combining motion sensing and camera functionality. It has two modes switched by physical buttons \u2014 emoji mode (MPU9250 IMU reads orientation and displays animated emoji faces on OLED based on tilt/motion) and camera mode (boots ESP32-CAM, connects to WiFi, and shows real-time status on OLED). Hardware stack: ESP32-CAM, MPU9250 IMU, SSD1306 OLED, two push buttons, and PCF8574 I\u00b2C GPIO expander. All I\u00b2C devices share a single bus on GPIO 13/14.",
-      "chip": "ESP32-CAM",
-      "image": "Cam.jpeg",
-      "image2": ""
-    },
     {
       "name": "Audio Visualizer",
       "desc": "ESP32-based Audio Monitoring and Visualization System using three INMP MEMS microphones capturing surrounding sound from multiple directions. Processes real-time audio data on the ESP32 and visualizes live waveforms, FFT spectrum analysis, microphone intensity levels, and sound direction on an OLED display as well as a custom web dashboard.",
@@ -574,6 +806,20 @@
       { "icon": "", "name": "VLSI Chip Design", "issuer": "Infosys Springboard", "year": "2024", "note": "Verilog", "image": "E.png" },
       { "icon": "", "name": "Introduction to IoT", "issuer": "Infosys Springboard", "year": "2023", "note": "Introduction to IoT", "image": "F.png" },
       { "icon": "", "name": "Robotics", "issuer": "IIT Bombay", "year": "2024", "note": "6th Sense Robotics", "image": "G.png" }
+    ],
+    "internships": [
+      {
+        "icon": "\ud83d\udcbc",
+        "name": "Internship Offer Letter",
+        "issuer": "Robu.in",
+        "pdf": "images/Internship Offer Letter- Atharva Baviskar (1).pdf"
+      },
+      {
+        "icon": "\ud83d\udcbc",
+        "name": "Internship",
+        "issuer": "PPCRC",
+        "image_path": "images/internship.jpg"
+      }
     ]
     
   },
@@ -764,6 +1010,16 @@
       "organizer": "PICT College of Engineering, Pune",
       "year": "2026",
       "image": "Energy.jpeg"
+    },
+    {
+      "trophy": "©",
+      "position": "Copyright Registered",
+      "event": "Weather Project Copyright",
+      "project": "Weather Project",
+      "organizer": "Copyright Office, Government of India",
+      "year": "",
+      "image": "",
+      "pdf": "images/Copyright Weather.pdf"
     }
   ],
   "boards_detail": [

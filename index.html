@@ -28,6 +28,8 @@
   <div class="loader-text">Initialising systems...</div>
 </div>
 
+<div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
 <!-- CURSOR -->
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
@@ -70,6 +72,7 @@
     <a href="#sensors-section">Sensors worked with</a>
     <a href="#achievements">Achievements</a>
     <a href="#major-projects">Projects</a>
+    <a href="#featured-projects">Additional Projects</a>
     <a href="#minor-projects">Fun</a>
     <a href="#certifications">Certs</a>
   </nav>
@@ -84,6 +87,7 @@
     <li><a href="#skills">Skills</a></li>
     <li><a href="#achievements">Achievements</a></li>
     <li><a href="#major-projects">Projects</a></li>
+    <li><a href="#featured-projects">Additional Projects</a></li>
     <li><a href="#minor-projects">Fun</a></li>
     <li><a href="#certifications">Certs</a></li>
   </ul>
@@ -123,11 +127,13 @@
     </div>
   </div>
 
+  <aside class="hero-qr" aria-label="NEX_LABZ Instagram QR code">
+    <img src="images/projects/QR.jpeg" alt="Scan to open the NEX_LABZ Instagram account">
+    <div class="hero-qr-label">SCAN TO FOLLOW<strong>@NEX_LABZ</strong></div>
+  </aside>
+
   <div class="hero-visual">
-    <div class="circuit-ring"><div class="ring-dot"></div></div>
-    <div class="circuit-ring"><div class="ring-dot ring-dot-2"></div></div>
-    <div class="circuit-ring"></div>
-    <div class="center-glow"></div>
+    <canvas id="signal-matrix" aria-hidden="true"></canvas>
   </div>
 </section>
 
@@ -172,9 +178,16 @@
   <div id="major-projects-list"></div>
 </section>
 
+<!-- ═══════════════════════════════════════════════ ADDITIONAL PROJECTS -->
+<section id="featured-projects">
+  <div class="section-label">07 / Additional Projects</div>
+  <h2 class="section-heading reveal">Additional<br>Projects</h2>
+  <div id="featured-projects-list"></div>
+</section>
+
 <!-- ═══════════════════════════════════════════════ MINOR PROJECTS -->
 <section id="minor-projects">
-  <div class="section-label">07 / Fun Builds</div>
+  <div class="section-label">08 / Fun Builds</div>
   <h2 class="section-heading reveal">Things I made for the<br>fun of building things</h2>
   <p class="section-sub reveal">Quick weekend experiments, silly ideas, and satisfying little contraptions. No deadlines, just vibes.</p>
   <div class="minor-grid reveal" id="minor-projects-list"></div>
@@ -182,7 +195,7 @@
 
 <!-- ═══════════════════════════════════════════════ CERTIFICATIONS -->
 <section id="certifications">
-  <div class="section-label">08 / Certifications</div>
+  <div class="section-label">09 / Certifications</div>
   <h2 class="section-heading reveal">learned,<br>formally</h2>
   <div class="cert-section reveal">
     <h3 class="cert-section-title">That Matter</h3>
@@ -191,6 +204,10 @@
   <div class="cert-section reveal">
     <h3 class="cert-section-title"> Out of Curiosity</h3>
     <div class="cert-grid" id="cert-curiosity-list"></div>
+  </div>
+  <div class="cert-section reveal">
+    <h3 class="cert-section-title">Internships and Experience</h3>
+    <div class="cert-grid" id="cert-internships-list"></div>
   </div>
 </section>
 
